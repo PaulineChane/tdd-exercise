@@ -4,6 +4,7 @@
 # 09/17/2020
 
 # Practice TDD by writing and testing a method to score Blackjack hands (blackjack_score)
+# Assume a single deck of cards is used.
 
 # blackjack_score.rb
 
@@ -12,6 +13,8 @@ VALID_CARDS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King', 'Ace']
 def blackjack_score(hand)
   # check for valid hand size
   raise ArgumentError unless VALID_CARDS[0..3].include? hand.length
+  # check for five of the same card
+  raise ArgumentError if hand.length == 5 && hand.uniq.length < 2
 
   # store any aces you come across
   aces = []

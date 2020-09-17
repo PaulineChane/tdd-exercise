@@ -85,7 +85,10 @@ describe 'Blackjack Score' do
 
   it 'raises an ArgumentError for scores over 21' do
     expect {
-      blackjack_score([9, 8, 7])
+      blackjack_score([9, 8, 7]) # 24
+    }.must_raise ArgumentError
+    expect {
+      blackjack_score([7, 8, 7]) # 22
     }.must_raise ArgumentError
   end
 
@@ -97,7 +100,7 @@ describe 'Blackjack Score' do
 
     # Hand too large
     expect {
-      blackjack_score([2, 3, 4, 5, 6, 7, "King"])
+      blackjack_score([2, 3, 4, 5, 6, "King"])
     }.must_raise ArgumentError
   end
 

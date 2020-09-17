@@ -12,9 +12,9 @@ VALID_CARDS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King', 'Ace']
 
 def blackjack_score(hand)
   # check for valid hand size
-  raise ArgumentError unless VALID_CARDS[0..3].include? hand.length
+  raise ArgumentError, "Invalid hand size - Must be 2-5 cards." unless VALID_CARDS[0..3].include? hand.length
   # check for five of the same card
-  raise ArgumentError if hand.length == 5 && hand.uniq.length < 2
+  raise ArgumentError, "Invalid hand -- too many of one suit (max 4)." if hand.length == 5 && hand.uniq.length < 2
 
   # store any aces you come across
   aces = []
@@ -22,7 +22,7 @@ def blackjack_score(hand)
   # since VALID_CARDS is an assortment of strings and numbers, let's convert them into one
   score_array = hand.map do |card|
     # check for valid card
-    raise ArgumentError unless VALID_CARDS.include? card
+    raise ArgumentError, "Not a valid card." unless VALID_CARDS.include? card
 
     # log aces for later, but you can add the minimum value
     if card == "Ace"
@@ -56,7 +56,7 @@ def blackjack_score(hand)
   end
 
   # sum all cards in hand and check for hands that are too large
-  raise ArgumentError if score > 21
+  raise ArgumentError, "Bust! Score is over 21." if score > 21
 
   # hand is definitely valid if it makes it to this point
   return score
